@@ -1,4 +1,5 @@
 <script setup>
+
 defineProps({
   msg: {
     type: String,
@@ -10,33 +11,23 @@ defineProps({
 <template>
   <div class="greetings">
     <h1 class="main-title">{{ msg }}</h1>
-    <h3>
+    <h2 class="main-subtitle">
       Учебный проект планировщика задач
-    </h3>
+    </h2>
   </div>
 </template>
 
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+<style scoped lang="scss">
+@import '../assets/scss/style.scss';
+.main-title{
+  font-size: 3rem;
+  font-weight: 200;
+  color: $color-white;
 }
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+.main-subtitle{
+  font-size: 1rem;
+  font-weight: 300;
+  text-transform: uppercase;
+  color: $color-white;
 }
 </style>

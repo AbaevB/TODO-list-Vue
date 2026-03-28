@@ -1,0 +1,46 @@
+// src/assets/scss/base/_variables.scss
+// Breakpoints
+
+
+$vp-xs: 375px;
+$vp-sm: 576px;
+$vp-md: 768px;
+$vp-lg: 992px;
+$vp-xl: 1200px;
+$vp-xxl: 1400px;
+
+
+// Colors
+
+// Basic colors
+$color-white: #fff;
+$color-black: #000;
+$color-red: #ff0000;
+$color-blue: #00007f;
+$color-green: #058743;
+
+// Primary colors
+$color-primary: #67A5EB;
+$color-primary-hover: #393B3C;
+
+// Accent colors
+$color-accent: #DC5DFC;
+$color-accent-secondary: #6A5DC2;
+
+
+
+// Background colors
+$color-bg-dark: #393B3C;
+$color-bg-light: rgba(255, 255, 255, 0.5);
+
+// Border colors
+$color-border-light: rgba(255, 255, 255, 0.25);
+$color-border-shadow: rgba(255, 255, 255, 0.33);
+$color-border-dark: rgba(0, 0, 0, 0.4);
+$color-border-modal: rgba(0, 0, 0, 0.5);
+$color-bg-overlay: rgba(0, 0, 0, 0.7);
+
+// Gradient colors
+$color-gradient-blue: rgba(39, 135, 245, 0.18);
+$color-gradient-purple: rgba(163, 147, 245, 0.18);
+$color-gradient-dark: rgba(39, 36, 36, 0.7);

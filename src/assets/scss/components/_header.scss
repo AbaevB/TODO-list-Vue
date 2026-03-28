@@ -1,0 +1,12 @@
+// src/assets/scss/components/_header.scss
+.header {
+    padding: 20px 0;
+    background-color: $color-blue;
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        gap: 50px;
+        
+        
+    }
+}

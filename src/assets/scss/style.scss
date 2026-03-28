@@ -1,1 +1,18 @@
 // src/assets/scss/style.scss
+@import 'base/fonts';
+@import 'base/variables';
+@import 'base/mixins';
+@import 'base/functions';
+
+// global
+@import 'global/normalize';
+@import 'global/visually-hidden';
+@import 'global/container';
+@import 'global/no-scroll';
+@import 'global/global';
+
+// components
+
+@import 'components/header';
+
+@import 'components/footer';

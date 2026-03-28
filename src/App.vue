@@ -1,22 +1,31 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <header class="header">
+    <div class="container">
+      <div class="header__wrapper">
+        <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
       <HelloWorld msg="TODO List" />
+      </div>
+      
     </div>
+
+
   </header>
 
-  <main>
-    
+  <main class="main">
+
   </main>
+  <footer class="footer">
+    <div class="container">
+      <span class="footer__copy">
+        &copy; AbaevB 2026
+      </span>
+    </div>
+  </footer>
 </template>
 
-<style scoped>
 
-</style>

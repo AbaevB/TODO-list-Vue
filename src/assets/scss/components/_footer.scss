@@ -1,0 +1,8 @@
+// src/assets/scss/components/_footer.scss
+.footer {
+    padding: 20px 0;
+    background-color: $color-blue;
+    &__copy {
+        color: $color-white;
+    }
+}
