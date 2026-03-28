@@ -17,7 +17,9 @@ import HelloWorld from './components/HelloWorld.vue'
   </header>
 
   <main class="main">
-
+    <div class="container">
+      
+    </div>
   </main>
   <footer class="footer">
     <div class="container">
