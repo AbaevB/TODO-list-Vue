@@ -1,5 +1,41 @@
 <script setup>
+import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
+import TodoForm from './components/TodoForm.vue';
+import TodoList from './components/TodoList.vue';
+
+// Список задач
+const todos = ref([
+  { id: 1, text: 'Изучить Vue', done: true },
+  { id: 2, text: 'Создать TODO-приложение', done: false }
+]);
+
+// Генерация уникального ID
+const generateId = () => {
+  return Date.now()
+};
+
+// Добавление новой задачи
+const addTodo = (text) => {
+  if (!text.trim()) return // не добавляем пустые
+
+  const newTodo = {
+    id: generateId(),
+    text: text.trim(),
+    done: false
+  }
+
+  todos.value.push(newTodo)
+};
+
+// Переключение статуса "сделано"
+const toggleTodo = (id) => {
+  const todo = todos.value.find(t => t.id === id)
+  if (todo) {
+    todo.done = !todo.done
+  }
+}
+
 </script>
 
 <template>
@@ -18,7 +54,15 @@ import HelloWorld from './components/HelloWorld.vue'
 
   <main class="main">
     <div class="container">
-      
+      <!-- Форма добавления задачи -->
+      <TodoForm @submit="addTodo" />
+
+      <!-- Список задач -->
+      <TodoList
+        :todos="todos"
+        @toggle="toggleTodo"
+        @remove="removeTodo"
+      />
     </div>
   </main>
   <footer class="footer">
