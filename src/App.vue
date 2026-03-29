@@ -1,19 +1,19 @@
 <script setup>
 import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
-import TodoForm from './components/TodoForm.vue';
-import TodoList from './components/TodoList.vue';
+import TodoForm from './components/TodoForm.vue'
+import TodoList from './components/TodoList.vue'
 
 // Список задач
 const todos = ref([
   { id: 1, text: 'Изучить Vue', done: true },
   { id: 2, text: 'Создать TODO-приложение', done: false }
-]);
+])
 
 // Генерация уникального ID
 const generateId = () => {
   return Date.now()
-};
+}
 
 // Добавление новой задачи
 const addTodo = (text) => {
@@ -26,7 +26,7 @@ const addTodo = (text) => {
   }
 
   todos.value.push(newTodo)
-};
+}
 
 // Переключение статуса "сделано"
 const toggleTodo = (id) => {
@@ -36,6 +36,10 @@ const toggleTodo = (id) => {
   }
 }
 
+// Удаление задачи
+const removeTodo = (id) => {
+  todos.value = todos.value.filter(todo => todo.id !== id)
+}
 </script>
 
 <template>
@@ -43,13 +47,9 @@ const toggleTodo = (id) => {
     <div class="container">
       <div class="header__wrapper">
         <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-      <HelloWorld msg="TODO List" />
+        <HelloWorld msg="TODO List" />
       </div>
-      
     </div>
-
-
   </header>
 
   <main class="main">
@@ -65,6 +65,7 @@ const toggleTodo = (id) => {
       />
     </div>
   </main>
+
   <footer class="footer">
     <div class="container">
       <span class="footer__copy">
@@ -73,5 +74,3 @@ const toggleTodo = (id) => {
     </div>
   </footer>
 </template>
-
-
