@@ -46,7 +46,7 @@ const removeTodo = (id) => {
   <header class="header">
     <div class="container">
       <div class="header__wrapper">
-        <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+        <img alt="TODO logo" class="logo" src="./assets/logo.png" width="125" height="125" />
         <HelloWorld msg="TODO List" />
       </div>
     </div>
