@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, computed } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TodoForm from './components/TodoForm.vue'
 import TodoList from './components/TodoList.vue'
@@ -7,42 +7,56 @@ import TodoList from './components/TodoList.vue'
 // Список задач
 const todos = ref(
   JSON.parse(localStorage.getItem('todos')) || [
-  { id: 1, text: 'Изучить Vue', done: true },
-  { id: 2, text: 'Создать TODO-приложение', done: false }
-])
+    { id: 1, text: 'Изучить Vue', done: true },
+    { id: 2, text: 'Создать TODO-приложение', done: false }
+  ]
+)
 
-// Сохраняем todos в localStorage при каждом изменении
+// Сохраняем todos в localStorage
 watch(todos, (newTodos) => {
   localStorage.setItem('todos', JSON.stringify(newTodos))
 }, { deep: true })
 
-// Генерация уникального ID
-const generateId = () => {
-  return Date.now()
+// Активный фильтр
+const activeFilter = ref('all')
+console.log('is ref:', activeFilter.value !== undefined)
+
+// Отфильтрованный список
+const filteredTodos = computed(() => {
+  if (activeFilter.value === 'active') {
+    return todos.value.filter(todo => !todo.done)
+  }
+  if (activeFilter.value === 'done') {
+    return todos.value.filter(todo => todo.done)
+  }
+  return todos.value
+})
+
+// Функция для установки фильтра - безопасна при HMR
+const setFilter = (filter) => {
+  activeFilter.value = filter
 }
 
-// Добавление новой задачи
-const addTodo = (text) => {
-  if (!text.trim()) return // не добавляем пустые
+// Генерация ID
+const generateId = () => Date.now()
 
-  const newTodo = {
+// Добавление задачи
+const addTodo = (text) => {
+  if (!text.trim()) return
+  todos.value.push({
     id: generateId(),
     text: text.trim(),
     done: false
-  }
-
-  todos.value.push(newTodo)
+  })
 }
 
-// Переключение статуса "сделано"
+// Переключение статуса
 const toggleTodo = (id) => {
   const todo = todos.value.find(t => t.id === id)
-  if (todo) {
-    todo.done = !todo.done
-  }
+  if (todo) todo.done = !todo.done
 }
 
-// Удаление задачи
+// Удаление
 const removeTodo = (id) => {
   todos.value = todos.value.filter(todo => todo.id !== id)
 }
@@ -60,12 +74,32 @@ const removeTodo = (id) => {
 
   <main class="main">
     <div class="container">
-      <!-- Форма добавления задачи -->
       <TodoForm @submit="addTodo" />
 
-      <!-- Список задач -->
+      <!-- Кнопки фильтров -->
+      <div class="filters">
+        <button
+          :class="{ active: activeFilter.value === 'all' }"
+          @click="setFilter('all')"
+        >
+          Все
+        </button>
+        <button
+          :class="{ active: activeFilter.value === 'active' }"
+          @click="setFilter('active')"
+        >
+          Активные
+        </button>
+        <button
+          :class="{ active: activeFilter.value === 'done' }"
+          @click="setFilter('done')"
+        >
+          Выполненные
+        </button>
+      </div>
+
       <TodoList
-        :todos="todos"
+        :todos="filteredTodos"
         @toggle="toggleTodo"
         @remove="removeTodo"
       />
