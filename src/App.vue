@@ -3,6 +3,11 @@ import { ref, watch, computed } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TodoForm from './components/TodoForm.vue'
 import TodoList from './components/TodoList.vue'
+import TodoFilters from './components/TodoFilters.vue'
+
+// Активный фильтр
+const activeFilter = ref('all')
+console.log('is ref:', activeFilter.value !== undefined)
 
 // Список задач
 const todos = ref(
@@ -17,9 +22,7 @@ watch(todos, (newTodos) => {
   localStorage.setItem('todos', JSON.stringify(newTodos))
 }, { deep: true })
 
-// Активный фильтр
-const activeFilter = ref('all')
-console.log('is ref:', activeFilter.value !== undefined)
+
 
 // Отфильтрованный список
 const filteredTodos = computed(() => {
@@ -77,26 +80,11 @@ const removeTodo = (id) => {
       <TodoForm @submit="addTodo" />
 
       <!-- Кнопки фильтров -->
-      <div class="filters">
-        <button
-          :class="{ active: activeFilter.value === 'all' }"
-          @click="setFilter('all')"
-        >
-          Все
-        </button>
-        <button
-          :class="{ active: activeFilter.value === 'active' }"
-          @click="setFilter('active')"
-        >
-          Активные
-        </button>
-        <button
-          :class="{ active: activeFilter.value === 'done' }"
-          @click="setFilter('done')"
-        >
-          Выполненные
-        </button>
-      </div>
+      <TodoFilters
+        v-if="activeFilter"
+        :active-filter="activeFilter.value"
+        @filter-change="setFilter"
+      />
 
       <TodoList
         :todos="filteredTodos"
