@@ -13,15 +13,7 @@
     margin-bottom: 0.75rem;
     transition: all 0.2s ease;
 
-    &--done {
-      opacity: 0.6;
-
-      .todo-item__text {
-        text-decoration: line-through;
-        color: #888;
-      }
-    }
-
+    
     &:hover {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }

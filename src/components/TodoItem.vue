@@ -12,25 +12,26 @@ const emit = defineEmits(['toggle', 'remove'])
 
 <template>
   <div class="todo-item">
-    <label class="todo-item__label">
-      <input
-        type="checkbox"
-        :checked="todo.done"
-        @change="$emit('toggle')"
-        class="todo-item__checkbox"
-      >
-      <span class="todo-item__text">{{ todo.text }}</span>
-    </label>
+  <!-- Чекбокс -->
+  <input
+    :id="`todo-checkbox-${todo.id}`"
+    type="checkbox"
+    :checked="todo.done"
+    @change="$emit('toggle', todo.id)"
+    class="todo-item__checkbox visually-hidden"
+  >
 
-    <button
-      @click="$emit('remove')"
-      class="todo-item__btn"
-      :aria-label="`Удалить задачу: ${todo.text}`"
-    >
-      &#10006;
-    </button>
-  </div>
+  <!-- Метка — привязана через for -->
+  <label 
+    :for="`todo-checkbox-${todo.id}`" 
+    class="todo-item__label"
+  >
+    <span class="todo-item__text">{{ todo.text }}</span>
+  </label>
+
+  <!-- Кнопка удаления -->
+  <button @click="$emit('remove', todo.id)" class="todo-item__btn">
+    &#x2718;
+  </button>
+</div>
 </template>
-
-
-
