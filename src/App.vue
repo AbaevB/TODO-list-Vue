@@ -1,14 +1,20 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TodoForm from './components/TodoForm.vue'
 import TodoList from './components/TodoList.vue'
 
 // Список задач
-const todos = ref([
+const todos = ref(
+  JSON.parse(localStorage.getItem('todos')) || [
   { id: 1, text: 'Изучить Vue', done: true },
   { id: 2, text: 'Создать TODO-приложение', done: false }
 ])
+
+// Сохраняем todos в localStorage при каждом изменении
+watch(todos, (newTodos) => {
+  localStorage.setItem('todos', JSON.stringify(newTodos))
+}, { deep: true })
 
 // Генерация уникального ID
 const generateId = () => {
