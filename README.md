@@ -457,14 +457,13 @@ watch(todos, (newTodos) => {
 
 ### 1. Активный фильтр
 
-
 ```js
 const activeFilter = ref('all')
 ```
 
 ### 2. Вычисляемый список
 
-```js 
+```js
 const filteredTodos = computed(() => {
   if (activeFilter.value === 'active') {
     return todos.value.filter(todo => !todo.done)
@@ -507,8 +506,8 @@ const setFilter = (filter) => {
 
 **Проверка:**
 
-- []  Фильтры работают
+- [x]  Фильтры работают
 
-- [] Нет ошибок в консоли
+- [x] Нет ошибок в консоли
 
-- [] HMR не ломает состояние благодаря default
+- [x] HMR не ломает состояние благодаря default
