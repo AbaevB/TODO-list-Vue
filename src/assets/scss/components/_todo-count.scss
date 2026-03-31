@@ -1,0 +1,14 @@
+// src/assets/scss/components/_todo-count.scss
+.todo-count {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: $color-black;
+  margin: 0.75rem 0 1rem;
+  text-align: center;
+  transition: color 0.2s ease;
+
+  &__value  {
+    
+    font-weight: 700;
+  }
+}

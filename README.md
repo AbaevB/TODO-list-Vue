@@ -457,14 +457,13 @@ watch(todos, (newTodos) => {
 
 ### 1. Активный фильтр
 
-
 ```js
 const activeFilter = ref('all')
 ```
 
 ### 2. Вычисляемый список
 
-```js 
+```js
 const filteredTodos = computed(() => {
   if (activeFilter.value === 'active') {
     return todos.value.filter(todo => !todo.done)
@@ -507,8 +506,40 @@ const setFilter = (filter) => {
 
 **Проверка:**
 
-- []  Фильтры работают
+- [x]  Фильтры работают
 
-- [] Нет ошибок в консоли
+- [x] Нет ошибок в консоли
 
-- [] HMR не ломает состояние благодаря default
+- [x] HMR не ломает состояние благодаря default
+
+## 🚀 Пятый этап: Счётчик активных задач
+
+Цель — показать пользователю, сколько задач осталось выполнить, **без избыточной анимации**, но с акцентом на важность информации.
+
+### 1. Вычисляемое свойство
+
+```js
+const activeCount = computed(() => {
+  return todos.value.filter(todo => !todo.done).length
+})
+
+```
+
+- Использует computed для реактивного подсчёта
+
+- Фильтрует задачи по done: false
+
+- Автоматически обновляется при любых изменениях
+
+### 2. Вывод в шаблоне
+
+```html
+
+<p class="todo-count">
+  Осталось: <span class="todo-count__value">{{ activeCount }}</span> задач
+</p>
+
+```
+
+
+

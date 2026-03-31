@@ -23,6 +23,7 @@ const setFilter = (filter) => {
   <div class="filters">
     <button
       type="button"
+      class="filters__btn"
       :class="{ active: activeFilter === 'all' }"
       @click="setFilter('all')"
     >
@@ -30,6 +31,7 @@ const setFilter = (filter) => {
     </button>
     <button
       type="button"
+      class="filters__btn"
       :class="{ active: activeFilter === 'active' }"
       @click="setFilter('active')"
     >
@@ -37,6 +39,7 @@ const setFilter = (filter) => {
     </button>
     <button
       type="button"
+      class="filters__btn"
       :class="{ active: activeFilter === 'done' }"
       @click="setFilter('done')"
     >

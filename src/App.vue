@@ -35,6 +35,11 @@ const filteredTodos = computed(() => {
   return todos.value
 })
 
+//  Вычисляемое количество активных задач
+const activeCount = computed(() => {
+  return todos.value.filter(todo => !todo.done).length
+})
+
 // Функция для установки фильтра - безопасна при HMR
 const setFilter = (filter) => {
   activeFilter.value = filter
@@ -67,7 +72,7 @@ const removeTodo = (id) => {
 
 <template>
   <header class="header">
-    <div class="container">
+    <div class="container" >
       <div class="header__wrapper">
         <img alt="TODO logo" class="logo" src="./assets/logo.png" width="125" height="125" />
         <HelloWorld msg="TODO List" />
@@ -75,8 +80,9 @@ const removeTodo = (id) => {
     </div>
   </header>
 
+
   <main class="main">
-    <div class="container">
+    <div class="container" >
       <TodoForm @submit="addTodo" />
 
       <!-- Кнопки фильтров -->
@@ -85,6 +91,10 @@ const removeTodo = (id) => {
         :active-filter="activeFilter.value"
         @filter-change="setFilter"
       />
+
+      <p class="todo-count">
+          Осталось: <span class="todo-count__value">{{ activeCount }}</span> задач
+      </p>
 
       <TodoList
         :todos="filteredTodos"
