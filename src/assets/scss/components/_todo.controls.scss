@@ -1,0 +1,31 @@
+// src/assets/scss/components/_todo.controls.scss
+.todo-controls {
+    margin-top: 1rem;
+    text-align: center;
+    padding: 0.75rem 0;
+    border-top: 1px solid $color-border-light;
+
+    &__clear-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        font-size: 1rem;
+        text-transform: uppercase;
+        color: $color-white;
+        background-color: $color-red;
+        border: 1px solid transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color .3s ease-in-out, border-color .3s ease-in-out, color .3s ease-in-out;
+
+        &:hover,
+        &:focus-visible {
+            background-color: $color-white;
+            border-color: $color-red;
+            color: $color-red;
+        }
+
+
+
+    }
+}

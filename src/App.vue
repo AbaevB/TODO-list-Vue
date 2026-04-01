@@ -4,7 +4,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import TodoForm from './components/TodoForm.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFilters from './components/TodoFilters.vue'
-
+import TodoControls from './components/TodoControls.vue'
 // Активный фильтр
 const activeFilter = ref('all')
 console.log('is ref:', activeFilter.value !== undefined)
@@ -68,41 +68,40 @@ const toggleTodo = (id) => {
 const removeTodo = (id) => {
   todos.value = todos.value.filter(todo => todo.id !== id)
 }
+
+const clearDone = () => {
+  todos.value = todos.value.filter(todo => !todo.done)
+}
+
+const hasCompleted = computed(() => {
+  return todos.value.some(todo => todo.done)
+})
+
+
 </script>
 
 <template>
   <header class="header">
-    <div class="container" >
+    <div class="container">
       <div class="header__wrapper">
         <img alt="TODO logo" class="logo" src="./assets/logo.png" width="125" height="125" />
         <HelloWorld msg="TODO List" />
       </div>
     </div>
   </header>
-
-
   <main class="main">
-    <div class="container" >
+    <div class="container">
       <TodoForm @submit="addTodo" />
 
-      <!-- Кнопки фильтров -->
-      <TodoFilters
-        v-if="activeFilter"
-        :active-filter="activeFilter.value"
-        @filter-change="setFilter"
-      />
+      <TodoFilters :active-filter="activeFilter.value" @filter-change="setFilter" />
 
-      <p class="todo-count">
-          Осталось: <span class="todo-count__value">{{ activeCount }}</span> задач
-      </p>
+      <TodoControls :active-count="activeCount" :has-completed="hasCompleted" @clear-done="clearDone" />
 
-      <TodoList
-        :todos="filteredTodos"
-        @toggle="toggleTodo"
-        @remove="removeTodo"
-      />
+      <TodoList :todos="filteredTodos" @toggle="toggleTodo" @remove="removeTodo" />
     </div>
   </main>
+
+
 
   <footer class="footer">
     <div class="container">
