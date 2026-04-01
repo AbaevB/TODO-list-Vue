@@ -542,4 +542,22 @@ const activeCount = computed(() => {
 ```
 
 
+## Компонент: TodoControls
 
+Назначение 
+
+- Объединяет элементы управления над списком задач:
+
+- Отображает количество активных задач
+
+- Показывает кнопку "Очистить завершённые" только при наличии выполненных задач
+
+```html
+<div class="todo-controls">
+  <p class="todo-count">Осталось: <span class="todo-count__value">{{ activeCount }}</span> задач</p>
+  <button v-if="hasCompleted" class="todo-controls__clear-btn" @click="$emit('clear-done')">
+    Очистить завершённые
+  </button>
+</div>
+
+```
