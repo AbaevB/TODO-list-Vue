@@ -5,10 +5,12 @@ import TodoForm from './components/TodoForm.vue'
 import TodoList from './components/TodoList.vue'
 import TodoFilters from './components/TodoFilters.vue'
 import TodoControls from './components/TodoControls.vue'
-// Активный фильтр
-// Читаем из localStorage, если есть; иначе — 'all'
+
+// Активный фильтр — с защитой от HMR
 const savedFilter = localStorage.getItem('todo-filter')
-const activeFilter = ref(savedFilter || 'all')
+const activeFilter = ref(savedFilter === 'active' || savedFilter === 'done' ? savedFilter : 'all')
+
+
 
 // Список задач
 const todos = ref(
@@ -46,6 +48,7 @@ const activeCount = computed(() => {
 
 // Функция для установки фильтра - безопасна при HMR
 const setFilter = (filter) => {
+  console.log('setFilter called:', filter)
   activeFilter.value = filter
 }
 
@@ -97,7 +100,7 @@ const hasCompleted = computed(() => {
     <div class="container">
       <TodoForm @submit="addTodo" />
 
-      <TodoFilters :active-filter="activeFilter.value" @filter-change="setFilter" />
+      <TodoFilters v-model="activeFilter" :key="activeFilter.value" />
 
       <TodoControls :active-count="activeCount" :has-completed="hasCompleted" @clear-done="clearDone" />
 
