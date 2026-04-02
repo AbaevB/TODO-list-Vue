@@ -4,17 +4,17 @@
   gap: 0.5rem;
   margin: 1rem 0;
 
- &__btn{
+  &__btn {
     padding: 0.75rem 1.5rem;
     background-color: $color-blue;
-    color: white;
+    color: $color-white;
     border: 1px solid transparent;
     border-radius: 6px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 500;
     text-transform: uppercase;
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     &:hover {
       background-color: $color-white;
@@ -22,8 +22,27 @@
       border-color: $color-blue;
     }
 
+    &:focus-visible {
+      outline: 2px solid rgba($color-blue, 0.3);
+      outline-offset: 2px;
+    }
+
     &:active {
       transform: translateY(1px);
+    }
+
+    // Активный фильтр — выделен
+    &--active {
+      background-color: $color-white;
+      color: $color-blue;
+      border-color: $color-blue;
+
+      // При ховере на активной кнопке — не меняем
+      &:hover {
+        background-color: $color-white;
+        color: $color-blue;
+        border-color: $color-blue;
+      }
     }
   }
 }

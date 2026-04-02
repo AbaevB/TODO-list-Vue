@@ -1,50 +1,29 @@
 <!-- src/components/TodoFilters.vue -->
- <script setup>
-// Пропс: текущий активный фильтр
+<script setup>
 defineProps({
-  activeFilter: {
+  modelValue: {
     type: String,
     required: true,
-    default: 'all', 
+    default: 'all',
     validator: (value) => ['all', 'active', 'done'].includes(value)
   }
 })
 
-// Событие: изменение фильтра
-const emit = defineEmits(['filterChange'])
-
-// Удобные методы для кнопок
-const setFilter = (filter) => {
-  emit('filterChange', filter)
-}
+defineEmits(['update:modelValue'])
 </script>
 
 <template>
   <div class="filters">
+    
+
     <button
-      type="button"
+      v-for="filter in ['all', 'active', 'done']"
+      :key="filter"
       class="filters__btn"
-      :class="{ active: activeFilter === 'all' }"
-      @click="setFilter('all')"
+      :class="{ 'filters__btn--active': modelValue === filter }"
+      @click="$emit('update:modelValue', filter)"
     >
-      Все
-    </button>
-    <button
-      type="button"
-      class="filters__btn"
-      :class="{ active: activeFilter === 'active' }"
-      @click="setFilter('active')"
-    >
-      Активные
-    </button>
-    <button
-      type="button"
-      class="filters__btn"
-      :class="{ active: activeFilter === 'done' }"
-      @click="setFilter('done')"
-    >
-      Выполненные
+      {{ filter === 'all' ? 'Все' : filter === 'active' ? 'Активные' : 'Выполненные' }}
     </button>
   </div>
 </template>
-
